@@ -38,7 +38,8 @@ Before you begin, ensure you have the following installed:
 
 This project uses an **H2 in-memory database**.
 
-*   The database schema is automatically created on startup based on the `src/main/resources/schema.sql` file.
+*   The database schema is created on startup from `src/main/resources/schema.sql`.
+*   The database is then populated with sample data from `src/main/resources/data.sql`.
 *   The **H2 Console** is enabled to allow you to view and query the database directly from your browser.
 
 ### How to Log In to the H2 Console
@@ -53,13 +54,39 @@ This project uses an **H2 in-memory database**.
 
 ## Available API Endpoints
 
-The following endpoints are available:
+The API supports the following endpoints for managing clients and apartments.
 
-| Method | Endpoint             | Description                               |
-|:-------|:---------------------|:------------------------------------------|
-| `GET`  | `/api/hello`         | A simple test endpoint to check if the API is running. |
-| `GET`  | `/api/clients`       | Retrieves a list of all clients in the database.       |
-| `GET`  | `/api/apartments`    | Retrieves a list of all apartments in the database.    |
+| Method | Endpoint                                   | Description                                                  |
+|:-------|:-------------------------------------------|:-------------------------------------------------------------|
+| `GET`  | `/api/hello`                               | A simple test endpoint to check if the API is running.       |
+| `GET`  | `/api/clients`                             | Retrieves a list of all clients.                             |
+| `GET`  | `/api/clients/{clientId}`                  | Retrieves a specific client by their UUID.                   |
+| `GET`  | `/api/apartments`                          | Retrieves a list of all apartments with filtering options.   |
+
+### Apartment Filtering Options
+
+The `/api/apartments` endpoint supports the following query parameters for filtering:
+*   `city={city}`: Filters apartments by city (case-insensitive).
+*   `minPrice={number}` & `maxPrice={number}`: Filters apartments by a rent price range.
+*   `isAvailableForRent={true|false}`: Filters apartments by availability.
+
+## Testing the Endpoints
+
+You can use `curl` to test the endpoints from your command line. Here are some examples based on the sample data:
+
+```bash
+# Get all clients
+curl -i 'http://localhost:8080/api/clients'
+
+# Get a specific client by ID
+curl -i 'http://localhost:8080/api/clients/87009ba1-6da8-431a-8ff9-73182d506e6d'
+
+# Filter apartments by city (case-insensitive)
+curl -i 'http://localhost:8080/api/apartments?city=gotham'
+
+# Filter apartments by price range
+curl -i 'http://localhost:8080/api/apartments?minPrice=100000&maxPrice=150000'
+```
 
 ## Project Structure
 
