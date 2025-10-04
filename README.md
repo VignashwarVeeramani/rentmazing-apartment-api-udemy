@@ -62,6 +62,7 @@ The API supports the following endpoints for managing clients and apartments.
 | `GET`  | `/api/clients`                             | Retrieves a list of all clients.                             |
 | `GET`  | `/api/clients/{clientId}`                  | Retrieves a specific client by their UUID.                   |
 | `GET`  | `/api/apartments`                          | Retrieves a list of all apartments with filtering options.   |
+| `POST` | `/api/client`                              | Creates a new client and their associated apartments.        |
 
 ### Apartment Filtering Options
 
@@ -77,6 +78,26 @@ You can use `curl` to test the endpoints from your command line. Here are some e
 ```bash
 # Get all clients
 curl -i 'http://localhost:8080/api/clients'
+
+# Create a new client
+curl --location --request POST 'http://localhost:8080/api/client' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "fullName": "Diana Prince",
+    "email": "diana.prince@mail.com",
+    "phone": "777-7777",
+    "apartments": [
+        {
+            "description": "Diana Prince building 1",
+            "buildingName": "Athens Temple",
+            "streetAddress": "Athens Ancient Street 7",
+            "city": "Athens",
+            "postalCode": "777111",
+            "rentPrice": 399861,
+            "availableForRent": false
+        }
+    ]
+}'
 
 # Get a specific client by ID
 curl -i 'http://localhost:8080/api/clients/87009ba1-6da8-431a-8ff9-73182d506e6d'

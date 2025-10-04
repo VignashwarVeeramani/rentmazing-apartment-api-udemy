@@ -1,18 +1,7 @@
-package com.rentmazing.apartment.entity;
+package com.rentmazing.apartment.data;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+public class ClientApartmentRequest {
 
-import java.util.UUID;
-
-@Table(name="client_apartments")
-@Entity
-public class ClientApartment {
-    @Id
-    @GeneratedValue
-    private UUID apartmentId;
     private String description;
     private String buildingName;
     private String streetAddress;
@@ -20,14 +9,6 @@ public class ClientApartment {
     private String postalCode;
     private boolean isAvailableForRent;
     private int rentPrice;
-
-    public UUID getApartmentId() {
-        return apartmentId;
-    }
-
-    public void setApartmentId(UUID apartmentId) {
-        this.apartmentId = apartmentId;
-    }
 
     public String getDescription() {
         return description;

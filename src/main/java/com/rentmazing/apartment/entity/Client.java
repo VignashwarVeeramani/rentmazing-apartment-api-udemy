@@ -10,6 +10,7 @@ import java.util.UUID;
 public class Client {
 
     @Id
+    @GeneratedValue
     private UUID clientId;
 
     private String fullName;
@@ -17,7 +18,7 @@ public class Client {
     private String email;
     private String phone;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id")
     private List<ClientApartment> apartments;
 

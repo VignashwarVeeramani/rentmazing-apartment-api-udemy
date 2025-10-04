@@ -1,5 +1,6 @@
 package com.rentmazing.apartment.service;
 
+import com.rentmazing.apartment.data.ClientRequest;
 import com.rentmazing.apartment.entity.Client;
 import com.rentmazing.apartment.entity.ClientApartment;
 import com.rentmazing.apartment.repository.ClientApartmentRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import static com.rentmazing.apartment.repository.ClientApartmentSpecification.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -55,5 +57,29 @@ public class ApartmentService {
          }
 
          return clientApartmentRepository.findAll(specification);
+     }
+
+     public UUID createClient(ClientRequest clientRequest) {
+          var clientEntity = new Client();
+          clientEntity.setFullName(clientRequest.getFullName());
+          clientEntity.setEmail(clientRequest.getEmail());
+          clientEntity.setPhone(clientRequest.getPhone());
+
+          if(clientRequest.getApartments() != null) {
+              var clientApartmentEntities = new ArrayList<ClientApartment>();
+              for (var apartmentRequest : clientRequest.getApartments()) {
+                  var apartmentEntity = new ClientApartment();
+                  apartmentEntity.setAvailableForRent(apartmentRequest.isAvailableForRent());
+                  apartmentEntity.setBuildingName(apartmentRequest.getBuildingName());
+                  apartmentEntity.setCity(apartmentRequest.getCity());
+                  apartmentEntity.setPostalCode(apartmentRequest.getPostalCode());
+                  apartmentEntity.setRentPrice(apartmentRequest.getRentPrice());
+                  apartmentEntity.setDescription(apartmentRequest.getDescription());
+                  apartmentEntity.setStreetAddress(apartmentRequest.getStreetAddress());
+                  clientApartmentEntities.add(apartmentEntity);
+              }
+              clientEntity.setApartments(clientApartmentEntities);
+          }
+          return clientRepository.save(clientEntity).getClientId();
      }
 }
