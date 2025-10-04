@@ -1,6 +1,6 @@
-# RentMazing Apartment API
+# Create a Spring Boot 3 REST API and Spring Data JPA
 
-This project is a simple RESTful API built with Spring Boot for managing clients and their associated apartments. It serves as a practical example of building web services using the Spring ecosystem.
+This project is a hands-on exercise to learn how to build a RESTful API using Spring Boot 3, Spring Data JPA, and other core components of the Spring ecosystem. It covers creating entities, repositories, services, and controllers to manage clients and their apartments.
 
 ## Technology Stack
 
@@ -47,7 +47,7 @@ This project uses an **H2 in-memory database**.
 1.  Once the application is running, navigate to `http://localhost:8080/h2-console` in your web browser.
 2.  You will see a login page. Ensure the fields are filled out as follows:
     -   **Driver Class**: `org.h2.Driver`
-    -   **JDBC URL**: `jdbc:h2:mem:rentmazingdb`
+    -   **JDBC URL**: `   `
     -   **User Name**: `sa`
     -   **Password**: (leave this field blank)
 3.  Click **Connect**. You can now browse the tables (`CLIENTS`, `CLIENT_APARTMENTS`) and run SQL queries.
